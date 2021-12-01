@@ -18,6 +18,16 @@ namespace day01
             }
 
             Console.WriteLine($"Part 1: {pt1}");
+
+            // pt 2
+            var pt2 = 0;
+
+            for (int i = 3; i < input.Length; i++)
+            {
+                if (input[i] > input[i - 3]) pt2++;
+            }
+
+            Console.WriteLine($"Part 2: {pt2}");
         }
     }
 }
