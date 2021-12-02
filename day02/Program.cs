@@ -32,13 +32,16 @@ namespace day02
 
         class day2sub
         {
-            public int Horizontal { get; set; }
-            public int Vertical { get; set; }
+            private int Horizontal { get; set; }
+            private int Pt1Vertical { get; set; }
+            private int Pt2Vertical { get; set; }
+            private int Aim { get; set; }
 
             public day2sub()
             {
                 Horizontal = 0;
-                Vertical = 0;
+                Pt1Vertical = 0;
+                Pt2Vertical = 0;
             }
 
             public void Move(Instruction ins)
@@ -46,16 +49,19 @@ namespace day02
                 if (ins.Direction == Directions.forward)
                 {
                     Horizontal += ins.Distance;
+                    Pt2Vertical += Aim * ins.Distance;
                     return;
                 }
 
                 switch (ins.Direction)
                 {
                     case Directions.up:
-                        Vertical -= ins.Distance;
+                        Pt1Vertical -= ins.Distance;
+                        Aim -= ins.Distance;
                         break;
                     case Directions.down:
-                        Vertical += ins.Distance;
+                        Pt1Vertical += ins.Distance;
+                        Aim += ins.Distance;
                         break;
                     default:
                         break;
@@ -64,7 +70,12 @@ namespace day02
 
             public int Pt1()
             {
-                return Horizontal * Vertical;
+                return Horizontal * Pt1Vertical;
+            }
+
+            public int Pt2()
+            {
+                return Horizontal * Pt2Vertical;
             }
         }
         class Program
@@ -83,6 +94,7 @@ namespace day02
                 }
 
                 Console.WriteLine($"Pt1: {pt1Sub.Pt1()}");
+                Console.WriteLine($"Pt2: {pt1Sub.Pt2()}");
             }
         }
     }
